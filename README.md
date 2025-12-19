@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Car Rental App
 Start of the Car Rental App project.
 =======
@@ -30,4 +29,3 @@ Architecture en couches :
 - Desktop
 
 
->>>>>>> 2ba365907e390a7ec13c7e7d5863b4dee80ce21a
