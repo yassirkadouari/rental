@@ -1,0 +1,162 @@
+﻿@{
+    ViewData["Title"] = "About Us";
+}
+
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 100px 0;
+        margin-bottom: 50px;
+    }
+    .stat-card {
+        text-align: center;
+        padding: 30px;
+        border-radius: 15px;
+        background: white;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    .stat-card:hover {
+        transform: translateY(-10px);
+    }
+    .stat-number {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #667eea;
+    }
+    .value-card {
+        padding: 30px;
+        border-left: 4px solid #667eea;
+        background: #f8f9fa;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="about-hero text-center">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-4">About RentACar</h1>
+        <p class="lead fs-4">Your Premium Car Rental Partner Since 2020</p>
+    </div>
+</div>
+
+<div class="container my-5">
+    <!-- Our Story -->
+    <div class="row mb-5">
+        <div class="col-lg-6">
+            <h2 class="fw-bold mb-4">Our Story</h2>
+            <p class="lead">Founded in 2020, RentACar has quickly become the leading car rental service in the region. We started with a simple mission: to make car rental easy, affordable, and enjoyable for everyone.</p>
+            <p>Today, we proudly serve thousands of satisfied customers with our fleet of premium vehicles, ranging from economical compact cars to luxury SUVs and exotic supercars.</p>
+        </div>
+        <div class="col-lg-6">
+            <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800" class="img-fluid rounded shadow" alt="Our Team">
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="row my-5 py-5">
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-number">26+</div>
+                <p class="text-muted mb-0">Premium Vehicles</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-number">5000+</div>
+                <p class="text-muted mb-0">Happy Customers</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-number">24/7</div>
+                <p class="text-muted mb-0">Customer Support</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="stat-card">
+                <div class="stat-number">99%</div>
+                <p class="text-muted mb-0">Satisfaction Rate</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Values -->
+    <div class="row my-5">
+        <div class="col-12">
+            <h2 class="fw-bold mb-4 text-center">Our Values</h2>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="value-card">
+                <h4 class="fw-bold">🚗 Quality Fleet</h4>
+                <p class="mb-0">All our vehicles are regularly maintained and thoroughly cleaned to ensure your safety and comfort.</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="value-card">
+                <h4 class="fw-bold">💰 Best Prices</h4>
+                <p class="mb-0">We offer competitive rates without hidden fees. What you see is what you pay.</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="value-card">
+                <h4 class="fw-bold">⚡ Easy Booking</h4>
+                <p class="mb-0">Book your car in just a few clicks with our user-friendly platform and instant confirmation.</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="value-card">
+                <h4 class="fw-bold">🛡️ Full Insurance</h4>
+                <p class="mb-0">All rentals include comprehensive insurance coverage for your peace of mind.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="row my-5 py-5 bg-light rounded">
+        <div class="col-12">
+            <h2 class="fw-bold mb-5 text-center">What Our Customers Say</h2>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <span class="text-warning">★★★★★</span>
+                    </div>
+                    <p class="card-text">"Excellent service! The car was spotless and the booking process was incredibly smooth. Highly recommended!"</p>
+                    <p class="text-muted mb-0"><strong>- Sarah M.</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <span class="text-warning">★★★★★</span>
+                    </div>
+                    <p class="card-text">"Best car rental experience ever! Great prices, amazing fleet, and super friendly staff."</p>
+                    <p class="text-muted mb-0"><strong>- Michael R.</strong></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <span class="text-warning">★★★★★</span>
+                    </div>
+                    <p class="card-text">"I've rented from many companies, but RentACar stands out. Professional, reliable, and affordable!"</p>
+                    <p class="text-muted mb-0"><strong>- Emma L.</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="text-center my-5 py-5">
+        <h2 class="fw-bold mb-4">Ready to Hit the Road?</h2>
+        <p class="lead mb-4">Browse our premium fleet and book your perfect car today!</p>
+        <a asp-controller="Vehicles" asp-action="Index" class="btn btn-primary btn-lg px-5 py-3">View Our Fleet</a>
+    </div>
+</div>

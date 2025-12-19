@@ -1,0 +1,24 @@
+@model IEnumerable<CarRentalApp.Core.Entities.Maintenance>
+
+<h2>Maintenances</h2>
+<p><a class="btn btn-primary" href="/Maintenance/Create">Create</a></p>
+<table class="table">
+    <thead>
+        <tr><th>Id</th><th>Vehicle</th><th>Date</th><th>Description</th><th>Cost</th><th>Completed</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+    @foreach(var m in Model) {
+        <tr>
+            <td>@m.Id</td>
+            <td>@m.Vehicle?.Brand @m.Vehicle?.Model</td>
+            <td>@m.Date.ToShortDateString()</td>
+            <td>@m.Description</td>
+            <td>@m.Cost</td>
+            <td>@m.IsCompleted</td>
+            <td>
+                @if(!m.IsCompleted){ <a class="btn btn-sm btn-success" href="/Maintenance/Complete/@m.Id">Complete</a> }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

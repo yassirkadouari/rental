@@ -1,0 +1,31 @@
+<Window x:Class="CarRentalApp.Desktop.Views.PaymentsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Payments Management" Height="600" Width="900">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Payment Records" FontSize="24" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <DataGrid x:Name="PaymentsGrid" Grid.Row="1" AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Booking ID" Binding="{Binding BookingId}" Width="100"/>
+                <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat='C'}" Width="100"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat='{}{0:dd/MM/yyyy}'}" Width="120"/>
+                <DataGridTextColumn Header="Method" Binding="{Binding PaymentMethod}" Width="100"/>
+                <DataGridTextColumn Header="Transaction ID" Binding="{Binding TransactionId}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <TextBlock Text="Total:" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <TextBlock x:Name="TxtTotal" Text="$0.00" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,20,0"/>
+            <Button Content="Refresh" Width="100" Height="35" Margin="5" Click="Refresh_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

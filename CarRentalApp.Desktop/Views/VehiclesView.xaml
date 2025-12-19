@@ -1,0 +1,102 @@
+<UserControl x:Class="CarRentalApp.Desktop.Views.VehiclesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarRentalApp.Desktop.Views"
+             xmlns:vm="clr-namespace:CarRentalApp.Desktop.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:VehiclesViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="900">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="350"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- List -->
+        <Grid Grid.Column="0" Margin="0,0,10,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Vehicles" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                <TextBox Width="200" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Margin="0,0,10,0" Padding="5"/>
+                <Button Content="New Vehicle" Command="{Binding StartNewCommand}" Padding="10,5" Background="#28a745" Foreground="White" BorderThickness="0"/>
+                <Button Content="Import" Command="{Binding ImportCommand}" Padding="10,5" Margin="5,0"/>
+                <Button Content="Refresh" Command="{Binding LoadDataCommand}" Padding="10,5" Margin="5,0"/>
+            </StackPanel>
+            
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Vehicles}" SelectedItem="{Binding SelectedVehicle}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Brand" Binding="{Binding Brand}" Width="*"/>
+                    <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="*"/>
+                    <DataGridTextColumn Header="Type" Binding="{Binding VehicleType.Name}" Width="80"/>
+                    <DataGridTextColumn Header="Plate" Binding="{Binding LicensePlate}" Width="100"/>
+                    <DataGridTextColumn Header="Rate" Binding="{Binding DailyRate, StringFormat=C}" Width="80"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="80"/>
+                    <DataGridTemplateColumn Header="Actions" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="X" Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Background="#dc3545" Foreground="White" BorderThickness="0" Padding="5,2" Margin="2"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        
+        <!-- Editor -->
+        <Border Grid.Column="1" Background="White" Padding="15" BorderBrush="#ddd" BorderThickness="1" Visibility="{Binding IsEditing, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ScrollViewer>
+                <StackPanel>
+                    <TextBlock Text="Vehicle Details" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+                    
+                    <Label Content="Brand"/>
+                    <TextBox Text="{Binding EditingVehicle.Brand, UpdateSourceTrigger=PropertyChanged}"/>
+                    
+                    <Label Content="Model"/>
+                    <TextBox Text="{Binding EditingVehicle.Model, UpdateSourceTrigger=PropertyChanged}"/>
+                    
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                             <Label Content="Year"/>
+                             <TextBox Text="{Binding EditingVehicle.Year}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="5,0,0,0">
+                             <Label Content="Daily Rate"/>
+                             <TextBox Text="{Binding EditingVehicle.DailyRate}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Label Content="License Plate"/>
+                    <TextBox Text="{Binding EditingVehicle.LicensePlate}"/>
+                    
+                    <Label Content="Type"/>
+                    <ComboBox ItemsSource="{Binding VehicleTypes}" DisplayMemberPath="Name" SelectedValuePath="Id" SelectedValue="{Binding EditingVehicle.VehicleTypeId}"/>
+
+                    <Label Content="Status"/>
+                    <ComboBox ItemsSource="{Binding Statuses}" SelectedItem="{Binding EditingVehicle.Status}"/>
+                    
+                    <Label Content="Image"/>
+                    <DockPanel>
+                        <Button Content="..." Command="{Binding UploadImageCommand}" DockPanel.Dock="Right" Padding="5,0"/>
+                        <TextBox Text="{Binding EditingVehicle.ImageUrl}" IsReadOnly="True" TextWrapping="NoWrap"/>
+                    </DockPanel>
+                    
+                    <Image Source="{Binding EditingVehicle.ImageUrl}" Height="150" Margin="0,10" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    
+                    <Button Content="Save Vehicle" Command="{Binding SaveCommand}" Margin="0,20,0,0" Padding="10" Background="#007ACC" Foreground="White" FontWeight="Bold"/>
+                    
+                    <TextBlock Text="{Binding StatusMessage}" Foreground="Red" Margin="0,10" TextWrapping="Wrap"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

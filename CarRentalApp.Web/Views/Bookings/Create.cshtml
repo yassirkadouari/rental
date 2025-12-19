@@ -1,0 +1,121 @@
+@model CarRentalApp.Web.Models.CreateBookingViewModel
+
+@{
+    ViewData["Title"] = "Book Vehicle";
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white p-3">
+                    <h3 class="mb-0 fw-bold">Complete Your Reservation</h3>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                             @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                            {
+                                <img src="@Model.ImageUrl" class="img-fluid rounded" alt="Vehicle">
+                            }
+                            else
+                            {
+                                <div class="bg-light text-center py-4 rounded">
+                                    <span class="fs-1">🚗</span>
+                                </div>
+                            }
+                        </div>
+                        <div class="col-md-8">
+                            <h4>@Model.VehicleBrand @Model.VehicleModel</h4>
+                            <h5 class="text-success">$@Model.DailyRate / day</h5>
+                        </div>
+                    </div>
+
+                    <form asp-action="Confirm">
+                        <input type="hidden" asp-for="VehicleId" />
+                        <input type="hidden" asp-for="VehicleBrand" />
+                        <input type="hidden" asp-for="VehicleModel" />
+                        <input type="hidden" asp-for="DailyRate" />
+                        <input type="hidden" asp-for="ImageUrl" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="StartDate" class="form-label fw-bold">Pick-up Date</label>
+                                <input asp-for="StartDate" class="form-control" type="date" />
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="EndDate" class="form-label fw-bold">Return Date</label>
+                                <input asp-for="EndDate" class="form-control" type="date" />
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Payment Method</label>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <input type="radio" class="btn-check" name="paymentMethod" id="paymentCard" value="Card" checked>
+                                    <label class="btn btn-outline-primary w-100 py-3" for="paymentCard">
+                                        <i class="fas fa-credit-card fa-2x d-block mb-2"></i>
+                                        Credit Card
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="radio" class="btn-check" name="paymentMethod" id="paymentCash" value="Cash">
+                                    <label class="btn btn-outline-success w-100 py-3" for="paymentCash">
+                                        <i class="fas fa-money-bill-wave fa-2x d-block mb-2"></i>
+                                        Cash
+                                    </label>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="radio" class="btn-check" name="paymentMethod" id="paymentTransfer" value="Transfer">
+                                    <label class="btn btn-outline-info w-100 py-3" for="paymentTransfer">
+                                        <i class="fas fa-university fa-2x d-block mb-2"></i>
+                                        Bank Transfer
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <strong>Total Estimated Price: </strong> <span id="totalPrice" class="fs-5 fw-bold ms-2">--</span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg fw-bold">Confirm Booking</button>
+                            <a asp-controller="Vehicles" asp-action="Details" asp-route-id="@Model.VehicleId" class="btn btn-outline-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function calculateTotal() {
+            const start = new Date(document.getElementById('StartDate').value);
+            const end = new Date(document.getElementById('EndDate').value);
+            const rate = @Model.DailyRate;
+            
+            if (start && end && end > start) {
+                const diffTime = Math.abs(end - start);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+                const total = diffDays * rate;
+                document.getElementById('totalPrice').innerText = '$' + total.toFixed(2);
+            } else {
+                document.getElementById('totalPrice').innerText = '--';
+            }
+        }
+
+        document.getElementById('StartDate').addEventListener('change', calculateTotal);
+        document.getElementById('EndDate').addEventListener('change', calculateTotal);
+        
+        // Init
+        calculateTotal();
+    </script>
+}

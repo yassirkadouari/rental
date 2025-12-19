@@ -1,0 +1,199 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-20px); }
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920') center/cover;
+        opacity: 0.15;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-content {
+        animation: fadeInUp 1s ease-out;
+        position: relative;
+        z-index: 2;
+    }
+
+    .feature-card {
+        padding: 40px 30px;
+        border-radius: 20px;
+        background: white;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation: fadeInUp 1s ease-out;
+        animation-fill-mode: both;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.2s; }
+    .feature-card:nth-child(2) { animation-delay: 0.4s; }
+    .feature-card:nth-child(3) { animation-delay: 0.6s; }
+
+    .feature-card:hover {
+        transform: translateY(-15px) scale(1.02);
+        box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+    }
+
+    .feature-icon {
+        font-size: 3.5rem;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .stats-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 0;
+    }
+
+    .stat-item {
+        animation: fadeInUp 1s ease-out;
+        animation-fill-mode: both;
+    }
+
+    .stat-number {
+        font-size: 3.5rem;
+        font-weight: 800;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .cta-section {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        padding: 100px 0;
+        color: white;
+    }
+
+    .btn-hero {
+        padding: 18px 50px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        border-radius: 50px;
+        background: white;
+        color: #667eea;
+        border: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+    }
+
+    .btn-hero:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        background: #f8f9fa;
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7 hero-content text-white">
+                <h1 class="display-2 fw-bold mb-4">Drive Your <span style="color: #ffd700;">Dreams</span></h1>
+                <p class="lead fs-3 mb-5">Experience luxury and comfort with our premium fleet. From compact cars to exotic supercars.</p>
+                <a asp-controller="Vehicles" asp-action="Index" class="btn btn-hero">
+                    Explore Our Fleet <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="container my-5 py-5">
+    <div class="text-center mb-5">
+        <h2 class="display-5 fw-bold">Why Choose RentACar?</h2>
+        <p class="lead text-muted">Premium service, unbeatable prices</p>
+    </div>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <div class="feature-icon mb-4">🚗</div>
+                <h3 class="fw-bold mb-3">26+ Premium Vehicles</h3>
+                <p class="text-muted">From economy to luxury, we have the perfect car for every occasion and budget.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <div class="feature-icon mb-4">⚡</div>
+                <h3 class="fw-bold mb-3">Instant Booking</h3>
+                <p class="text-muted">Book your car in just 2 minutes with our streamlined process and instant confirmation.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <div class="feature-icon mb-4">💳</div>
+                <h3 class="fw-bold mb-3">Secure Payment</h3>
+                <p class="text-muted">Multiple payment options with bank-level security for your peace of mind.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="stats-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 mb-4 stat-item" style="animation-delay: 0.1s;">
+                <div class="stat-number">26+</div>
+                <p class="fs-5 mb-0">Premium Cars</p>
+            </div>
+            <div class="col-md-3 mb-4 stat-item" style="animation-delay: 0.2s;">
+                <div class="stat-number">5000+</div>
+                <p class="fs-5 mb-0">Happy Clients</p>
+            </div>
+            <div class="col-md-3 mb-4 stat-item" style="animation-delay: 0.3s;">
+                <div class="stat-number">24/7</div>
+                <p class="fs-5 mb-0">Support</p>
+            </div>
+            <div class="col-md-3 mb-4 stat-item" style="animation-delay: 0.4s;">
+                <div class="stat-number">99%</div>
+                <p class="fs-5 mb-0">Satisfaction</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="cta-section text-center">
+    <div class="container">
+        <h2 class="display-4 fw-bold mb-4">Ready to Hit the Road?</h2>
+        <p class="lead fs-4 mb-5">Book your dream car today and enjoy the ride of your life!</p>
+        <a asp-controller="Vehicles" asp-action="Index" class="btn btn-hero">
+            View All Vehicles <i class="fas fa-car ms-2"></i>
+        </a>
+    </div>
+</div>

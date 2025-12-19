@@ -1,0 +1,52 @@
+@model CarRentalApp.Core.Entities.Vehicle
+
+@{
+    ViewData["Title"] = @Model.Brand + " " + @Model.Model;
+}
+
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Fleet</a></li>
+            <li class="breadcrumb-item active" aria-current="page">@Model.Brand @Model.Model</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 rounded-3 overflow-hidden">
+                <div class="bg-light d-flex align-items-center justify-content-center" style="height: 400px;">
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl" class="img-fluid" style="max-height: 100%;" alt="@Model.Brand @Model.Model">
+                    }
+                    else
+                    {
+                        <span class="text-muted fa-5x">🚗</span>
+                    }
+                </div>
+            </div>
+            <div class="mt-4">
+                <h3>Description</h3>
+                <p class="text-muted">Experience the comfort and performance of the @Model.Brand @Model.Model. Perfect for your trips.</p>
+                <div class="text-muted small">
+                     <i class="fas fa-gas-pump me-2"></i>Fuel Efficient
+                     <span class="mx-3">|</span>
+                     <i class="fas fa-cogs me-2"></i>Automatic
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow border-0 p-4">
+                <h2 class="text-primary fw-bold">$@Model.DailyRate <small class="text-muted fs-6">/ day</small></h2>
+                <hr/>
+                <h5 class="mb-3">Booking Details</h5>
+                <form asp-controller="Bookings" asp-action="Create" method="get">
+                    <input type="hidden" name="vehicleId" value="@Model.Id" />
+                    <button type="submit" class="btn btn-primary w-100 py-3 fw-bold">Book This Car</button>
+                    <p class="text-center mt-3 small text-muted">Free cancellation up to 48h before pick-up.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
